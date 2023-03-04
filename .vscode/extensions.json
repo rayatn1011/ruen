@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "tauri-apps.tauri-vscode",
+    "bradlc.vscode-tailwindcss",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint"
   ]
