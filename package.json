@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "format": "prettier --write .",
     "tauri": "tauri",
     "prepare": "husky install"
   },
