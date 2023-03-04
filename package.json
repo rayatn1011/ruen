@@ -7,20 +7,24 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "prepare": "husky install"
   },
   "dependencies": {
+    "@tauri-apps/api": "^1.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@tauri-apps/api": "^1.2.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@tauri-apps/cli": "^1.2.2",
     "@types/node": "^18.7.10",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^3.0.0",
+    "husky": "^8.0.3",
     "typescript": "^4.6.4",
-    "vite": "^4.0.0",
-    "@tauri-apps/cli": "^1.2.2"
+    "vite": "^4.0.0"
   }
 }
