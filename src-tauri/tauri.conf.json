@@ -39,7 +39,7 @@
     "windows": [
       {
         "fullscreen": false,
-        "resizable": true,
+        "resizable": false,
         "title": "Ruen",
         "width": 800,
         "height": 600
