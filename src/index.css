@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    @apply text-stone-700;
+  }
+  input[type='text'] {
+    @apply rounded border-2 border-stone-300 p-2 outline-none transition focus:border-teal-600;
+  }
+  textarea {
+    @apply rounded border-2 border-stone-300 p-2 outline-none transition focus:border-teal-600;
+  }
+}
