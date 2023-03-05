@@ -8,7 +8,6 @@ interface Props {
 
 function RequireApiKeyRoute({ children }: Props) {
   const thirdPartyApi = getThirdPartyApi()
-  console.log(thirdPartyApi)
   const hasOpenAiKey = !!thirdPartyApi?.openAi
 
   return hasOpenAiKey ? (
