@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { openAiApiUrl } from '../utils'
+import { getThirdPartyApi } from '../utils/third-party-api'
+
 interface ChatData {
   role: string
   content: string
@@ -25,13 +27,21 @@ interface ChatCompletion {
 }
 
 const useChat = () => {
+  const apiKey = getThirdPartyApi()?.openAi
+  const fetchController = useRef<AbortController | null>(null)
   const [fetchState, setFetchState] = useState({
-    data: null,
+    data: {} as ChatCompletion,
     isLoading: false,
     isError: false,
   })
 
-  const fetchApi = () => {
+  const fetchApi = (chatData: ChatData[]) => {
+    if (fetchController.current !== null) {
+      fetchController.current.abort()
+    }
+
+    fetchController.current = new AbortController()
+
     setFetchState((prev) => ({
       ...prev,
       isLoading: true,
@@ -41,12 +51,13 @@ const useChat = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer YOUR_API_KEY',
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: 'Hello!' }],
+        messages: chatData,
       }),
+      signal: fetchController.current.signal,
     })
       .then((response) => {
         if (!response.ok) {
@@ -74,6 +85,14 @@ const useChat = () => {
         }))
       })
   }
+
+  useEffect(() => {
+    return () => {
+      if (fetchController.current !== null) {
+        fetchController.current.abort()
+      }
+    }
+  }, [])
 
   return {
     chatData: fetchState.data,
