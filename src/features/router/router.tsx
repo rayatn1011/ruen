@@ -6,7 +6,7 @@ import { FillInApiKeyPage } from '../../pages/fill-in-api-key-page'
 
 enum RoutePaths {
   Home = '/',
-  FillInApiKey = 'fill-in-api-key',
+  FillInApiKey = '/fill-in-api-key',
   NotFound = '*',
 }
 
