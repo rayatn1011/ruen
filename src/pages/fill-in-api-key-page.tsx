@@ -29,7 +29,7 @@ function FillInApiKeyPage() {
           <p>
             If you don&#39;t have a key, please visit&#32;
             <a
-              className="text-teal-600 underline decoration-transparent transition hover:decoration-stone-900"
+              className="text-teal-600 underline decoration-transparent transition hover:decoration-teal-600"
               href="https://platform.openai.com/account/api-keys"
               target="_blank"
               rel="noreferrer"

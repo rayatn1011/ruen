@@ -4,6 +4,9 @@
 
 @layer base {
   * {
+    @apply text-current;
+  }
+  body {
     @apply text-stone-700;
   }
   input[type='text'] {
