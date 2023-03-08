@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useChat } from '../features/apis'
+import { Typewriter } from './type-writer'
 
 function HomePage() {
   const [inputText, setInputText] = useState('')
@@ -12,9 +13,14 @@ function HomePage() {
 
     debounceRef.current = setTimeout(() => {
       const messages = [
-        { role: 'user', content: `請幫我潤飾以下文字 ${inputMessage}` },
+        {
+          role: 'user',
+          content: `請幫我潤飾以下文字 ${inputMessage}`,
+        },
       ]
-      fetchChat(messages)
+      if (inputMessage.trim()) {
+        fetchChat(messages)
+      }
     }, 2000)
   }
 
@@ -40,12 +46,7 @@ function HomePage() {
         />
       </div>
       <div className="flex-1 shrink-0 border">
-        <textarea
-          readOnly
-          className="h-full w-full resize-none"
-          autoComplete="false"
-          value={outputText}
-        />
+        <Typewriter content={outputText} />
       </div>
     </div>
   )
