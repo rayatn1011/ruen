@@ -18,7 +18,7 @@ function HomePage() {
           content: `請幫我潤飾以下文字 ${inputMessage}`,
         },
       ]
-      if (inputMessage.trim()) {
+      if (inputMessage.trim().length > 0) {
         fetchChat(messages)
       }
     }, 2000)
