@@ -4,10 +4,10 @@ function Typewriter({ content }: { content: string }) {
   const [text, setText] = useState('')
 
   useEffect(() => {
-    let i = 0
+    let textLengthCount = 0
     const intervalId = setInterval(() => {
-      setText(content.substring(0, i++))
-      if (i > content.length) clearInterval(intervalId)
+      setText(content.substring(0, textLengthCount++))
+      if (textLengthCount > content.length) clearInterval(intervalId)
     }, 10)
     return () => clearInterval(intervalId)
   }, [content])
