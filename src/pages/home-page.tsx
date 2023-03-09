@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useChat } from '../features/apis'
-import { Typewriter } from './type-writer'
+import { Typewriter } from '../features/type-writer'
 
 function HomePage() {
   const [inputText, setInputText] = useState('')
