@@ -17,7 +17,7 @@ const TypeMarkdownWriter = ({ content }: { content: string }) => {
 
   return (
     <div className="relative h-full rounded border-2 border-stone-300 bg-white outline-none transition focus:border-teal-600">
-      <div className="absolute top-0 right-0 bottom-0 left-0 overflow-auto">
+      <div className="absolute top-0 right-0 bottom-0 left-0 overflow-auto p-2">
         <ReactMarkdown
           components={{
             code({ node, inline, className, children, ...props }) {
@@ -25,7 +25,7 @@ const TypeMarkdownWriter = ({ content }: { content: string }) => {
               return !inline && match ? (
                 <SyntaxHighlighter
                   style={vscDarkPlus as any}
-                  customStyle={{ margin: 0, height: '100%' }}
+                  customStyle={{ margin: '4px 0', borderRadius: 4 }}
                   language={match[1]}
                   PreTag="div"
                   {...props}
