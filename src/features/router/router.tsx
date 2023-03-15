@@ -16,19 +16,23 @@ enum RoutePaths {
 const router = createBrowserRouter([
   {
     path: RoutePaths.Home,
-    element: (
-      <RequireApiKeyRoute>
-        <SideBarRoute />
-      </RequireApiKeyRoute>
-    ),
+    element: <SideBarRoute />,
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: (
+          <RequireApiKeyRoute>
+            <HomePage />
+          </RequireApiKeyRoute>
+        ),
       },
       {
         path: RoutePaths.Setting,
-        element: <SettingPage />,
+        element: (
+          <RequireApiKeyRoute>
+            <SettingPage />
+          </RequireApiKeyRoute>
+        ),
       },
     ],
   },
