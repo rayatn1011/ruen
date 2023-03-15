@@ -16,29 +16,34 @@ const TypeMarkdownWriter = ({ content }: { content: string }) => {
   }, [content])
 
   return (
-    <ReactMarkdown
-      components={{
-        code({ node, inline, className, children, ...props }) {
-          const match = /language-(\w+)/.exec(className || '')
-          return !inline && match ? (
-            <SyntaxHighlighter
-              style={vscDarkPlus as any}
-              language={match[1]}
-              PreTag="div"
-              {...props}
-            >
-              {String(children).replace(/\n$/, '')}
-            </SyntaxHighlighter>
-          ) : (
-            <code className={className} {...props}>
-              {children}
-            </code>
-          )
-        },
-      }}
-    >
-      {text}
-    </ReactMarkdown>
+    <div className="relative h-full rounded border-2 border-stone-300 bg-white outline-none transition focus:border-teal-600">
+      <div className="absolute top-0 right-0 bottom-0 left-0 overflow-auto">
+        <ReactMarkdown
+          components={{
+            code({ node, inline, className, children, ...props }) {
+              const match = /language-(\w+)/.exec(className || '')
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  style={vscDarkPlus as any}
+                  customStyle={{ margin: 0, height: '100%' }}
+                  language={match[1]}
+                  PreTag="div"
+                  {...props}
+                >
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
+              ) : (
+                <code className={className} {...props}>
+                  {children}
+                </code>
+              )
+            },
+          }}
+        >
+          {text}
+        </ReactMarkdown>
+      </div>
+    </div>
   )
 }
 
