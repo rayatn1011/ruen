@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useChat } from '../features/apis'
 import { Typewriter, TypeMarkdownWriter } from '../features/type-writer'
+import { Loading } from '../features/ui'
 
 enum Role {
   polishing = 'polishing',
@@ -95,22 +96,22 @@ function HomePage() {
   }, [chatData])
 
   return (
-    <div className="flex h-full w-full flex-col gap-1">
-      <div className="flex">
-        <select
-          id="dropdown"
-          value={selectedOption}
-          onChange={handleSelectChange}
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+    <div className="flex h-full w-full flex-col">
+      <div className="shrink-0">
+        <h1 className="mb-6 text-4xl font-bold">Mission</h1>
+        <h2 className="text-md mb-2">
+          <span className="mr-2">請幫我</span>
+          <select value={selectedOption} onChange={handleSelectChange}>
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </h2>
       </div>
-      <div className="flex h-full w-full gap-8">
-        <div className="relative flex-1 shrink-0">
+      <div className="grid w-full grow grid-cols-2 gap-4">
+        <div>
           <textarea
             className="h-full w-full resize-none"
             autoComplete="false"
@@ -122,7 +123,8 @@ function HomePage() {
             value={inputText}
           />
         </div>
-        <div className="flex-1 shrink-0 border">
+        <div className="relative">
+          {isChatLoading && <Loading />}
           {selectedOption === Role.analyze ? (
             <TypeMarkdownWriter content={outputText} />
           ) : (
