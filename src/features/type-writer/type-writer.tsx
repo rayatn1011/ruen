@@ -8,7 +8,7 @@ function Typewriter({ content }: { content: string }) {
     const intervalId = setInterval(() => {
       setText(content.substring(0, textLengthCount++))
       if (textLengthCount > content.length) clearInterval(intervalId)
-    }, 10)
+    }, 3)
     return () => clearInterval(intervalId)
   }, [content])
 
