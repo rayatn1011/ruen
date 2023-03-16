@@ -1,51 +1,79 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { SVGProps, useState } from 'react'
+import { NavLink, Outlet, To } from 'react-router-dom'
 import IconMenu from '~icons/material-symbols/menu-rounded'
-import IconChat from '~icons/material-symbols/chat-outline-rounded'
+import IconMission from '~icons/material-symbols/other-admission-outline-rounded'
 import IconSetting from '~icons/material-symbols/settings-rounded'
 
 import { RoutePaths } from '.'
 
 function SideBarRoute() {
-  const classNames = {
-    navItem: {
-      base: 'block p-3 text-xl text-stone-500 transition hover:text-teal-600 active:text-teal-700',
-      isActive:
-        'block p-3 text-xl transition text-teal-600 active:text-teal-700',
-    },
-  }
+  const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <div className="grid h-screen w-screen grid-cols-[max-content_1fr]">
-      <nav>
-        <ul className="flex h-full flex-col items-center bg-stone-200">
+    <div className="h-screen w-screen">
+      <nav
+        className={`fixed z-20 h-screen overflow-hidden bg-stone-200 transition-all ${
+          isExpanded
+            ? 'w-60 rounded-r-2xl shadow-2xl shadow-stone-500'
+            : 'w-14 rounded-none'
+        }`}
+      >
+        <ul className="flex h-full flex-col">
           <li>
-            <button className={classNames.navItem.base} type="button">
-              <IconMenu />
+            <button
+              className="flex w-full items-center p-4 text-stone-500 transition hover:text-stone-600 active:text-stone-700"
+              type="button"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              <IconMenu className="h-6 w-6 flex-shrink-0" />
+              <span className="ml-4">Menu</span>
             </button>
           </li>
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive ? classNames.navItem.isActive : classNames.navItem.base
+                `flex w-full items-center p-4 transition hover:text-teal-600 active:text-teal-700 ${
+                  isActive ? 'text-teal-600' : 'bg-transparent text-stone-500'
+                } ${isActive && isExpanded ? 'bg-stone-300' : ''}`
               }
               to={RoutePaths.Home}
+              onClick={() => setIsExpanded(false)}
             >
-              <IconChat />
+              <IconMission className="h-6 w-6 flex-shrink-0" />
+              <span className="ml-4">Mission</span>
             </NavLink>
           </li>
           <li className="mt-auto mb-2">
             <NavLink
               className={({ isActive }) =>
-                isActive ? classNames.navItem.isActive : classNames.navItem.base
+                `flex w-full items-center p-4 transition hover:text-teal-600 active:text-teal-700 ${
+                  isActive ? 'text-teal-600' : 'bg-transparent text-stone-500'
+                }  ${isActive && isExpanded ? 'bg-stone-300' : ''}`
               }
               to={RoutePaths.Setting}
+              onClick={() => setIsExpanded(false)}
             >
-              <IconSetting />
+              <IconSetting className="h-6 w-6 flex-shrink-0" />
+              <span className="ml-4">Settings</span>
             </NavLink>
           </li>
         </ul>
       </nav>
-      <main className="bg-stone-100 px-8 py-10">
+      {isExpanded && (
+        <div
+          role="button"
+          tabIndex={0}
+          className="fixed top-0 right-0 bottom-0 left-0 z-10 bg-stone-900/60"
+          onClick={() => setIsExpanded(false)}
+          onKeyDown={() => setIsExpanded(false)}
+        ></div>
+      )}
+
+      <main
+        className={`ml-12 h-full bg-stone-100 px-8 py-10 transition ${
+          isExpanded ? 'blur' : 'blur-none'
+        }`}
+      >
         <Outlet />
       </main>
     </div>
